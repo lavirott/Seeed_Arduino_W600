@@ -158,7 +158,7 @@ class AtWifi:public ATSerial
         * */
         bool wifiSocketRead(int32_t socket,uint32_t read_len);
 
-        void httpPost(int socket, const __FlashStringHelper* post_url,const __FlashStringHelper* host,const __FlashStringHelper* user_agent, const __FlashStringHelper* content_type, const __FlashStringHelper* opt_headers, char* content);
+        bool httpPost(int socket, const __FlashStringHelper* post_url,const __FlashStringHelper* host,const __FlashStringHelper* user_agent, const __FlashStringHelper* content_type, const __FlashStringHelper* opt_headers, char* content);
 
         // AP mode: should ssid be broadcast?
         bool broadcastApSsidSet(bool flag);

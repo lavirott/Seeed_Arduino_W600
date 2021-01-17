@@ -261,7 +261,7 @@ void AtWifi::write_P(const __FlashStringHelper* data){
  * each header must be terminated with \n
  * content must end with \n\n.
  ***/
-void AtWifi::httpPost(
+bool AtWifi::httpPost(
     int socket,
     const __FlashStringHelper* post_url,
     const __FlashStringHelper* host,
@@ -276,7 +276,7 @@ void AtWifi::httpPost(
    int len_message_len = snprintf_P(nullptr,0,fmt,(content_len-2));//does not include the 2 newlines
    bool sent =  wifiSocketPrepareSend(socket,header_len + content_len + len_message_len);
 
-   if (sent){
+   if (sent) {
         char buf[len_message_len];
         sprintf_P(buf,fmt,(content_len-2));
     #if DEBUG_EN
@@ -293,7 +293,8 @@ void AtWifi::httpPost(
         write_P(opt_headers);
         ATSerial::ATWrite(buf);
         ATSerial::ATWrite(content);
-   }
+   } 
+   return sent;
 }
 
 /**Recv msg from socket.
